@@ -18,7 +18,7 @@ class Migration_Create_table_contacten extends CI_Migration {
         'constraint' => 100,
         'null' => false
          ),
-        'email-adres' => array(
+        'email' => array(
         'type' => 'varchar',
         'constraint' => 50,
         'null' => false
