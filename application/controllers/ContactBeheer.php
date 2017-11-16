@@ -6,7 +6,7 @@ class ContactBeheer extends CI_Controller {
         $data['contacts'] = $this->contact_model->get_allContacts();
 
         $this->load->view('templates/header');
-        $this->load->view('contactbeheer/index', $data);
+        $this->load->view('pages/contactbeheer', $data);
         $this->load->view('templates/footer');
     }
 
