@@ -27,3 +27,19 @@ function removeLoader() {
 function activateTooltip() {
     $('body').tooltip({selector:'[data-toggle=tooltip]'});
 }
+
+function isNullOrEmpty(value) {
+	return value === null || value === "";
+}
+
+function createElement(innerHTML) {
+    var fragment = document.createDocumentFragment();
+
+    var elem = document.createElement('div');
+    elem.innerHTML = innerHTML;
+
+    while (elem.childNodes[0]) {
+        fragment.appendChild(elem.childNodes[0]);
+    }
+    return fragment.childNodes[0];
+}

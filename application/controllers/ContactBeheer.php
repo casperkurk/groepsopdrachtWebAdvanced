@@ -14,4 +14,14 @@ class ContactBeheer extends CI_Controller {
         $allContacts = json_encode($this->contact_model->get_allContacts());
         echo $allContacts;
     }
+
+    public function addContact() {
+        $contact = json_decode(trim(file_get_contents('php://input')), true);
+        $response = $this->contact_model->post_addContact($contact);
+        if ($response) {
+            var_dump(http_response_code(201));
+            echo json_encode($contact);
+        }
+        else var_dump(http_response_code(400));
+    }
 }

@@ -8,4 +8,8 @@
             $query = $this->db->get('contacten');
             return $query->result_array();
         }
+
+        public function post_addContact($contact) {
+            return $this->db->insert('contacten', $contact);           
+        }
     }
