@@ -1,5 +1,6 @@
 const GET_ALLCONTACTS_URL = `${window.location.href}/getAllContacts`;
 const POST_ADDCONTACT_URL = `${window.location.href}/addContact`;
+const DELETE_CONTACT_URL = `${window.location.href}/deleteContact`;
 
 window.addEventListener("load", handleWindowLoad);
 
@@ -29,7 +30,7 @@ function writeUserProfiles(contacts) {
     let contactProfilesHtmlTemplate = '<div class="btn btn-outline-success my-3" data-toggle="tooltip" data-placement="right" title="Toggle contact toevoegen" id="open-contact-form-btn"><i class="fa fa-plus" aria-hidden="true" id="toggle-icon"></i></div>\n';
     contactProfilesHtmlTemplate += '<div class="row" id="allContacts">\n';
 	contacts.forEach(contact => {
-        contactProfilesHtmlTemplate += SINGLE_CONTACT_TEMPL.replace("::name::", contact.name).replace("::email::", contact.email);
+        contactProfilesHtmlTemplate += SINGLE_CONTACT_TEMPL.replace("::name::", contact.name).replace("::email::", contact.email).replace("::id::", contact.id);
     });
     
     contactProfilesHtmlTemplate += '</div>';
@@ -72,7 +73,7 @@ function toggleContactForm() {
 function addContact() {
 	let name = document.getElementById("name-input").value;
 	let email = document.getElementById("email-input").value;
-	var contact = { name: name, email: email };
+	var contact = { name: name, email: email};
 	
 	fetch(POST_ADDCONTACT_URL, {
 		method: "POST",
@@ -108,7 +109,7 @@ function resetContactForm() {
 
 function addContactToUserProfiles(contact) {	
 	let allContactsElement = document.getElementById("allContacts");
-	let singleContactTemp = createElement(SINGLE_CONTACT_TEMPL.replace("::name::", contact.name).replace("::email::", contact.email));
+	let singleContactTemp = createElement(SINGLE_CONTACT_TEMPL.replace("::name::", contact.name).replace("::email::", contact.email).replace("::delbtn::", contact.id));
 	allContactsElement.appendChild(singleContactTemp);
 }
 
@@ -133,4 +134,11 @@ function showFeedback(message, colorTheme) {
 	}, 5000);
 }
 
+function deleteContact(id) {
+    DELETE_CONTACT_URL(id);
+}
 
+function handleDeleteContactError(exception) {
+        showFeedback("Er is iets fout gelopen. Het contact is niet verwijderd.", "danger");
+        console.error(exception);
+}

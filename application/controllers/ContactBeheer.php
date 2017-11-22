@@ -24,4 +24,8 @@ class ContactBeheer extends CI_Controller {
         }
         else var_dump(http_response_code(400));
     }
+    public function removeContact($id){
+        $contact = $this->contact_model->delete_contact($id);
+        echo  $contact;
+    }
 }
