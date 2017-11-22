@@ -1,6 +1,5 @@
 const GET_ALLCONTACTS_URL = `${window.location.href}/getAllContacts`;
 const POST_ADDCONTACT_URL = `${window.location.href}/addContact`;
-const DELETE_CONTACT_URL = `${window.location.href}/deleteContact`;
 
 window.addEventListener("load", handleWindowLoad);
 
@@ -134,8 +133,22 @@ function showFeedback(message, colorTheme) {
 	}, 5000);
 }
 
-function deleteContact(id) {
-    DELETE_CONTACT_URL(id);
+function deleteContact($id) {
+    let DELETE_CONTACT_URL = `${window.location.href}/deleteContact?id=` + $id;
+    console.log(DELETE_CONTACT_URL);
+
+    if (!confirm('Are you sure you want to delete this contact?')) {
+        return false;
+    }
+    fetch(DELETE_CONTACT_URL, {
+        method: "DELETE",
+    })
+        .then(() => {
+            $(this).parent().css('display', 'none');
+        })
+        .catch((exception) => {
+            handleAddContactError(exception);
+        });
 }
 
 function handleDeleteContactError(exception) {
