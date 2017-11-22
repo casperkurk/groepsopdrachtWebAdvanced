@@ -18,9 +18,4 @@
         public function delete_contact($id) {
             return $this->db->delete('contacten', array('id' => $id));
         }
-
-        public function __get($key)
-        {
-            return $this->db->get('contacten', $key);
-        }
     }

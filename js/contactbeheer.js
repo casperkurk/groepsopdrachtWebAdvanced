@@ -134,7 +134,7 @@ function showFeedback(message, colorTheme) {
 }
 
 function deleteContact($id) {
-    let DELETE_CONTACT_URL = `${window.location.href}/deleteContact?id=` + $id;
+    let DELETE_CONTACT_URL = `${window.location.href}/removeContact/id/` + $id;
     console.log(DELETE_CONTACT_URL);
 
     if (!confirm('Are you sure you want to delete this contact?')) {
@@ -143,15 +143,12 @@ function deleteContact($id) {
     fetch(DELETE_CONTACT_URL, {
         method: "DELETE",
     })
-        .then(() => {
-            $(this).parent().css('display', 'none');
+        .then((response) => {
+            console.log("PostResponse: ", response);
+            if (response.status != 201) throw response.status;
         })
-        .catch((exception) => {
-            handleAddContactError(exception);
+        .catch(e => {
+            console.log(e);
         });
-}
-
-function handleDeleteContactError(exception) {
-        showFeedback("Er is iets fout gelopen. Het contact is niet verwijderd.", "danger");
-        console.error(exception);
+    getAllContacts()
 }
