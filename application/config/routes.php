@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'pages/view';
 $route['contactbeheer'] = 'contactbeheer/index';
+$route['migrate'] = 'migrate/index';
 //Hier stellen we in dat we niet naar localhost/groepsopdracht/pages/view/... moeten gaan om de pagina te zien, maar localhost/groepsopdracht/...
 //$1 betekent alle waarden
 $route['(:any)'] = 'pages/view/$1';

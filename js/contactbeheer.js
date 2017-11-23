@@ -1,5 +1,6 @@
 const GET_ALLCONTACTS_URL = `${window.location.href}/getAllContacts`;
 const POST_ADDCONTACT_URL = `${window.location.href}/addContact`;
+var DELETE_CONTACT_URL = `${window.location.href}/removeContact/id/`;
 
 window.addEventListener("load", handleWindowLoad);
 
@@ -134,21 +135,20 @@ function showFeedback(message, colorTheme) {
 }
 
 function deleteContact($id) {
-    let DELETE_CONTACT_URL = `${window.location.href}/removeContact/id/` + $id;
-    console.log(DELETE_CONTACT_URL);
-
-    if (!confirm('Are you sure you want to delete this contact?')) {
+    if (!confirm('Ben je zeker dat je deze contact wilt verwijderen?')) {
         return false;
     }
-    fetch(DELETE_CONTACT_URL, {
+    fetch(`${DELETE_CONTACT_URL}${$id}`, {
         method: "DELETE",
     })
         .then((response) => {
-            console.log("PostResponse: ", response);
-            if (response.status != 201) throw response.status;
+            console.log("DeleteResponse: ", response);
+			if (response.status != 200) throw response.status;
+			getAllContacts();
+			confirm('Contact is succesvol verwijderd.');
         })
         .catch(e => {
+			confirm('Contact verwijderen mislukt.');
             console.log(e);
         });
-    getAllContacts()
 }

@@ -11,6 +11,6 @@ class Migrate extends CI_Controller
       show_error($this->migration->error_string());
     } 
       
-    echo "\nMigraties waren succesvol!";
+    echo "<p>Migraties waren succesvol!</p>";
   }
 }

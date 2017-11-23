@@ -27,7 +27,7 @@ class Migration_Create_table_contacten extends CI_Migration {
 
         $this->dbforge->add_key('id', true);
         $this->dbforge->create_table('contacten', true);
-        echo 'Table contacten gecreëerd!';
+        echo '<p>Table contacten gecreëerd!</p>';
     }   
   }
   

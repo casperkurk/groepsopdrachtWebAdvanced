@@ -38,7 +38,7 @@ class Migration_Seed_contacten extends CI_Migration {
         $this->db->insert('contacten', $contact);
       }
 
-      echo "\nContacten geseed met data!";
+      echo "<p>Contacten geseed met data!</p>";
     }   
   }
   
